@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'playlists/add_to_spotify'
+  get 'songs/my_research'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -9,4 +11,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :songs, only: %i[my_research show] do
+    resources :playlists, only: :index
+  end
+
+  resources :playlists, only: %i[add_to_spotify show new create]
+
+  resources :users, only: %i[show] do
+    resources :playlists, only: :index
+  end
 end

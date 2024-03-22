@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_105202) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_110944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,9 +18,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_105202) do
     t.string "title"
     t.date "date_of_release"
     t.string "spotify_url"
-    t.bigint "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "artist_id"
     t.index ["artist_id"], name: "index_albums_on_artist_id"
   end
 
