@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :playlists, only: :index
   end
 
-  resources :playlists, only: %i[add_to_spotify show new create]
+  resources :playlists, only: %i[add_to_spotify show create]
 
   resources :users, only: %i[show] do
     resources :playlists, only: :index
