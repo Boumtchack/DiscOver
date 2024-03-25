@@ -1,0 +1,12 @@
+<% spotify_playlist = RSpotify::Playlist.find(@spotify_account.id, @playlist.spotify_url) %>
+<%= @playlist.name %>
+<%=link_to "voir dans spotify", spotify_playlist.external_urls["spotify"], target: "blank"%>
+
+<ul>
+  <% spotify_playlist.tracks.each do |track| %>
+    <li>
+      <%= track.name %>
+      <%=link_to "voir sur spotify", track.external_urls["spotify"], target: "blank" %>
+    </li>
+  <% end %>
+</ul>

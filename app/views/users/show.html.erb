@@ -1,1 +1,8 @@
-<h1>show de <%= @user.display_name %></h1>
+<h1>show de <%= @spotify_account.display_name %></h1>
+<ul>
+  <% @user.playlists.each do |playlist| %>
+  <li>
+    <%= link_to "#{playlist.name} #{playlist.id}", playlist_path(playlist) %>
+  </li>
+  <% end %>
+</ul>
