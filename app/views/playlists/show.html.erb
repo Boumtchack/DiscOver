@@ -8,7 +8,7 @@
       <%= song.id %>
       <%= song.spotify_url %>
       <%= song.title %>
-      <%= song.artist.genres.first %>
+      <%= song.artist.genres.first.name unless song.artist.genres.empty? %>
       <%= link_to "voir dans spotify", song.spotify_link, target: "blank" %>
     </li>
   <% end %>
