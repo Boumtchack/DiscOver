@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   def load_song(spotify_url)
     return if Song.where(spotify_url: spotify_url).exists?
 
-    puts spotify_url
     track = RSpotify::Track.find(spotify_url)
     album_id = track.album.id
     new_song = Song.new
