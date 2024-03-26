@@ -42,8 +42,7 @@ class ApplicationController < ActionController::Base
     new_playlist.songs.delete_all
     playlist.tracks.each do |track|
       load_song(track.id)
-      song = Song.where(spotify_url: track.id)
-      new_playlist.songs << song
+      new_playlist.songs << Song.where(spotify_url: track.id)
     end
   end
 
@@ -85,8 +84,7 @@ class ApplicationController < ActionController::Base
   def assgin_genres_to_artist(new_artist, artist)
     artist.genres.each do |spotify_genre|
       load_genre(spotify_genre)
-      genre = Song.where(name: spotify_genre)
-      new_artist.genres << genre
+      new_artist.genres << Genre.where(name: spotify_genre)
     end
   end
 end

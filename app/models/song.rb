@@ -6,6 +6,5 @@ class Song < ApplicationRecord
   has_many :playlists, through: :playlist_managers
 
   validates :spotify_url, uniqueness: true
-  validates :title, uniqueness: true
   validates :spotify_link, uniqueness: true
 end
