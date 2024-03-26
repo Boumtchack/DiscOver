@@ -7,4 +7,6 @@ class Artist < ApplicationRecord
 
   has_many :members
   has_many :musicians, through: :members
+
+  validates :spotify_url, uniqueness: true
 end

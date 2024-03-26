@@ -1,2 +1,8 @@
-<h1>Songs#my_research</h1>
-<p>Find me in app/views/songs/my_research.html.erb</p>
+<ul>
+  <% @tracks.each do |track| %>
+    <li>
+      <%= track.name %>
+      <%=link_to "voir sur spotify", track.external_urls["spotify"], target: "blank" %>
+    </li>
+  <% end %>
+</ul>

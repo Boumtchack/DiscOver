@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       new_playlist.user = @user
       new_playlist.name = playlist.name
       new_playlist.spotify_url = playlist.id
-      new_playlist.save
+      new_playlist.followers = playlist.followers['total']
     end
   end
 
