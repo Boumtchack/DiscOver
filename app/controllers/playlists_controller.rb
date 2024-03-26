@@ -5,18 +5,13 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
+    s_playlist = RSpotify::Playlist.find(@spotify_account.id, @playlist.spotify_url)
+    load_playlist_songs(@playlist, s_playlist)
   end
 
   def create
   end
 
   def add_to_spotify
-  end
-
-  private
-
-  def configure_user
-    @user = current_user
-    @spotify_account = RSpotify::User.find(current_user.uid)
   end
 end

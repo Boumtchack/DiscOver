@@ -2,27 +2,16 @@ class UsersController < ApplicationController
   before_action :configure_user
 
   def show
-    load_playlists
+    load_playlists unless @user.playlists.size == @spotify_account.playlists.size
   end
 
   private
 
-  def delete_playlists
-  end
-
   def load_playlists
-    spotify_playlists = @spotify_account.playlists
-    spotify_playlists.each do |playlist|
-      new_playlist = Playlist.new
-      new_playlist.user = @user
-      new_playlist.name = playlist.name
-      new_playlist.spotify_url = playlist.id
-      new_playlist.followers = playlist.followers['total']
-    end
+    @spotify_account.playlists.each { |playlist| load_playlist(playlist.id) }
+    # faire une boucle qui vérifie que les playlists sont bien toutes içi
   end
 
-  def configure_user
-    @user = current_user
-    @spotify_account = RSpotify::User.find(current_user.uid)
+  def delete_playlists
   end
 end
