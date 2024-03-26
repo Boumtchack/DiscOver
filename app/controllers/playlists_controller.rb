@@ -5,8 +5,8 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.find(params[:id])
-    s_playlist = RSpotify::Playlist.find(@spotify_account.id, @playlist.spotify_url)
-    load_playlist_songs(@playlist, s_playlist)
+    spotify_playlist = RSpotify::Playlist.find(@spotify_account.id, @playlist.spotify_url)
+    load_playlist_songs(@playlist, spotify_playlist)
   end
 
   def create

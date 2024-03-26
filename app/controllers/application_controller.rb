@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def load_song(spotify_url)
     return if Song.where(spotify_url: spotify_url).exists?
 
+    puts spotify_url
     track = RSpotify::Track.find(spotify_url)
     album_id = track.album.id
     new_song = Song.new
@@ -22,14 +23,6 @@ class ApplicationController < ActionController::Base
     load_album(album_id)
     new_song.album = Album.where(spotify_url: album_id).first
     new_song.save!
-  end
-
-  def load_playlist_songs(new_playlist, playlist)
-    playlist.tracks.each do |track|
-      load_song(track.id)
-      song = Song.where(spotify_url: track.id)
-      new_playlist.songs << song
-    end
   end
 
   def load_playlist(spotify_url)
@@ -43,6 +36,15 @@ class ApplicationController < ActionController::Base
     new_playlist.followers = playlist.followers['total']
     new_playlist.spotify_link = playlist.external_urls["spotify"]
     new_playlist.save!
+  end
+
+  def load_playlist_songs(new_playlist, playlist)
+    new_playlist.songs.delete_all
+    playlist.tracks.each do |track|
+      load_song(track.id)
+      song = Song.where(spotify_url: track.id)
+      new_playlist.songs << song
+    end
   end
 
   def load_album(spotify_url)
@@ -68,6 +70,23 @@ class ApplicationController < ActionController::Base
     new_artist.name = artist.name
     new_artist.spotify_url = artist.id
     new_artist.spotify_link = artist.external_urls["spotify"]
+    assgin_genres_to_artist(new_artist, artist)
     new_artist.save!
+  end
+
+  def load_genre(spotify_genre)
+    return if Genre.where(name: spotify_genre).exists?
+
+    new_genre = Genre.new
+    new_genre.name = spotify_genre
+    new_genre.save!
+  end
+
+  def assgin_genres_to_artist(new_artist, artist)
+    artist.genres.each do |spotify_genre|
+      load_genre(spotify_genre)
+      genre = Song.where(name: spotify_genre)
+      new_artist.genres << genre
+    end
   end
 end

@@ -4,9 +4,12 @@
 <%=link_to "voir dans spotify", @playlist.spotify_link, target: "blank"%>
 <ul>
   <% @playlist.songs.each do |song| %>
-  <li>
-    <%= song.title %>
-    <%= link_to "voir dans spotify", song.spotify_link, target: "blank" %>
-  </li>
+    <li>
+      <%= song.id %>
+      <%= song.spotify_url %>
+      <%= song.title %>
+      <%= song.artist.genres.first %>
+      <%= link_to "voir dans spotify", song.spotify_link, target: "blank" %>
+    </li>
   <% end %>
 </ul>
