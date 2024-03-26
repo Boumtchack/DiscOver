@@ -1,8 +1,8 @@
 <ul>
-  <% @tracks.each do |track| %>
+  <% @songs.each do |song| %>
     <li>
-      <%= track.name %>
-      <%=link_to "voir sur spotify", track.external_urls["spotify"], target: "blank" %>
+      <%= song.title %>
+      <%=link_to "voir sur spotify", song.spotify_link, target: "blank" %>
     </li>
   <% end %>
 </ul>

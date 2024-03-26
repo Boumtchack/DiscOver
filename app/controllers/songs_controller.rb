@@ -5,15 +5,11 @@ class SongsController < ApplicationController
   end
 
   def my_research
-    if params[:query].present?
-      @tracks = RSpotify::Track.search(params[:query])
+    @tracks = RSpotify::Track.search(params[:query]) if params[:query].present?
+    @songs = []
+    @tracks.each do |track|
+      load_song(track.id)
+      @songs << Song.where(spotify_url: track.id).first
     end
-  end
-
-  private
-
-  def configure_user
-    @user = current_user
-    @spotify_account = RSpotify::User.find(current_user.uid)
   end
 end
