@@ -3,4 +3,6 @@ class Song < ApplicationRecord
   has_one :artist, through: :album
 
   has_many :playlists, through: :playlist_managers
+
+  validates :spotify_url, uniqueness: true
 end

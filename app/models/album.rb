@@ -4,4 +4,6 @@ class Album < ApplicationRecord
 
   has_many :members, through: :artists
   has_many :musicians, through: :members
+
+  validates :spotify_url, uniqueness: true
 end

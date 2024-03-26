@@ -2,6 +2,7 @@
 <ul>
   <% @user.playlists.each do |playlist| %>
   <li>
+    <%= playlist.followers %>
     <%= link_to "#{playlist.name} #{playlist.id}", playlist_path(playlist) %>
   </li>
   <% end %>
