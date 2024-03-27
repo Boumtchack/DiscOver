@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   before_action :configure_user
 
+  def spotify
+    @spotify_user = RSpotify::User.from_omniauth(request.env["omniauth.auth"])
+  end
+
   def show
+    raise
     load_playlists unless @user.playlists.size == @spotify_account.playlists.size
   end
 

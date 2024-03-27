@@ -275,7 +275,7 @@ Devise.setup do |config|
   config.omniauth :spotify,
                   ENV['SPOTIFY_CLIENT_ID'],
                   ENV['SPOTIFY_CLIENT_SECRET'],
-                  scope: 'user-read-email,user-read-private',
+                  scope: 'user-read-email,user-read-private,playlist-modify-private,playlist-modify-public',
                   callback_path: '/users/auth/spotify/callback'
 
   # ==> Warden configuration
