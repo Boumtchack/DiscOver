@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    raise
     load_playlists unless @user.playlists.size == @spotify_account.playlists.size
   end
 

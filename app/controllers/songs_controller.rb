@@ -5,7 +5,8 @@ class SongsController < ApplicationController
   end
 
   def my_research
-    @tracks = RSpotify::Track.search(params[:query]) if params[:query].present?
+    search = RSpotify::Track.search(params[:query]).first if params[:query].present?
+    find_recomandations_for(search)
     @songs = []
     @artists = []
     @tracks.each do |track|
@@ -23,5 +24,9 @@ class SongsController < ApplicationController
     else
       @artists << artist
     end
+  end
+
+  def find_recomandations_for(search)
+    
   end
 end
